@@ -80,7 +80,7 @@
         // connect(header,연결 성공시 콜백,에러발생시 콜백)
         stompClient.connect({}, function () {
                 //subscribe(subscribe url,해당 url로 메시지를 받을때마다 실행할 함수)
-                sub = stompClient.subscribe('/topic/test', function (e) {
+                sub = stompClient.subscribe('/chat/1', function (e) {
                     //e.body에 전송된 data가 들어있다
                     showMessage(JSON.parse(e .body));
                 });
@@ -111,6 +111,7 @@
     //메시지 브로커로 메시지 전송
     function send(){
         data = {
+            'id':0,
             'sender' :userId,
             'contents': $("#msg").val()
         };

@@ -1,10 +1,19 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.socket.BinaryMessage;
+
+import java.io.File;
+import java.nio.ByteBuffer;
 
 @Controller
 public class GreetingController {
@@ -15,9 +24,15 @@ public class GreetingController {
         this.template=template;
     }
     @MessageMapping("/greetings")
-    public void greet(String text){
+    public void greet(@Payload String text){
         System.out.println(text);
-        this.template.convertAndSend("/topic/1",text);//리액트에서 구독
-        this.template.convertAndSend("/topic/test",text);//index.html에서 구독
+        //this.template.convertAndSend("/chat/1",text);//리액트에서 구독
+        //this.template.convertAndSend("/chat/2",text);//index.html에서 구독
+    }
+    @MessageMapping("/binary")
+    public void greet(@Payload byte[] b){
+        System.out.println(b.length);
+        //this.template.convertAndSend("/chat/1",text);//리액트에서 구독
+        //this.template.convertAndSend("/chat/2",text);//index.html에서 구독
     }
 }
