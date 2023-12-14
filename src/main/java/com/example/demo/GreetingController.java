@@ -26,13 +26,13 @@ public class GreetingController {
     @MessageMapping("/greetings")
     public void greet(@Payload String text){
         System.out.println(text);
-        //this.template.convertAndSend("/chat/1",text);//리액트에서 구독
-        //this.template.convertAndSend("/chat/2",text);//index.html에서 구독
+        this.template.convertAndSend("/chat/1",text);//리액트에서 구독
+
     }
     @MessageMapping("/binary")
     public void greet(@Payload byte[] b){
         System.out.println(b.length);
-        //this.template.convertAndSend("/chat/1",text);//리액트에서 구독
-        //this.template.convertAndSend("/chat/2",text);//index.html에서 구독
+        this.template.convertAndSend("/chat/1",b);//리액트에서 구독
+
     }
 }
